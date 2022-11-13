@@ -28,10 +28,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class Memo1BankApp {
 
 	@Autowired
-	private AccountService accountService;
+	private TransactionService transactionService;
 
 	@Autowired
-	private TransactionService transactionService;
+	private AccountService accountService;
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(Memo1BankApp.class, args);
@@ -88,8 +89,8 @@ public class Memo1BankApp {
 	}
 
 	@GetMapping("/transactions/{cbu}")
-	public List<Transaction> getAllTransactionsByCBU(@RequestParam Long cbu){
-		return transactionService.getAllTransactionsByCBU(cbu);
+	public List<Transaction> getAllTransactionsByCbu(@RequestParam Long cbu){
+		return transactionService.getAllTransactionsByCbu(cbu);
 	}
 
 	@DeleteMapping("/transactions/id")

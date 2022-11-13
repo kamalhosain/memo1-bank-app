@@ -11,11 +11,16 @@ import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Optional;
 
+import com.aninfo.service.TransactionService;
+
 @Service
 public class AccountService {
 
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private TransactionService transactionService;
 
     public Account createAccount(Account account) {
         return accountRepository.save(account);
@@ -45,6 +50,8 @@ public class AccountService {
             throw new InsufficientFundsException("Insufficient funds");
         }
 
+        transactionService.createTransaction(cbu,sum,"whithdraw");
+
         account.setBalance(account.getBalance() - sum);
         accountRepository.save(account);
 
@@ -62,6 +69,8 @@ public class AccountService {
             double promo = sum * 0.1;
             sum += promo >= 500 ? 500 : promo;
         }
+
+        transactionService.createTransaction(cbu,sum,"deposit");
 
         Account account = accountRepository.findAccountByCbu(cbu);
         account.setBalance(account.getBalance() + sum);

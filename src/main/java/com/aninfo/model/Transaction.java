@@ -2,6 +2,7 @@ package com.aninfo.model;
 
 import javax.persistence.*;
 
+@Entity
 public class Transaction {
 
     @Id
@@ -39,12 +40,12 @@ public class Transaction {
         return this.mountTransaction;
     }
 
-    public void setCBU(Long cbu){
+    public void setCbu(Long cbu){
         this.cbu = cbu;
     }
 
-    public Long getCBU(){
-        return this.cbu;
+    public Long getCbu(){
+        return cbu;
     }
 
     public void setType(String type){
